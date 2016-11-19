@@ -11,7 +11,7 @@ var server = http.createServer(function (request, response) {
 
   var authorization = new watson.AuthorizationV1({
 	  username: 'b77079c8-42eb-44b1-9ee0-b737f74ab747',
-	  password: 'dBDx4iUwDZb4'
+	  password: 'dBDx4iUwDZb4',
 	  url: watson.TextToSpeechV1.URL
 	});
 

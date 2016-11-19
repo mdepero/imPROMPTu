@@ -23,10 +23,11 @@
 
 <pre><code><script style="display: block;">
 document.querySelector('#button').onclick = function () {
-  fetch('/api/speech-to-text/token')
-  .then(function(response) {
-      return response.text();
-  }).then(function (token) {
+  // fetch('/api/speech-to-text/token')
+  // .then(function(response) {
+  //     return response.text();
+  // }).then(function (token) {
+    var token = 'wzjX4UTN12%2FTBYmWcIwL0%2BRaASV2wuXp6xmyYf2mUiJoLXXX6xb%2FBKPBYeObsQplSRRWLixDxSur4PxS5uWQ9P6Qs2z9UH4Wuli98UEPoy0%2BNRfLGGyY2JjCIu7LatroMNMhG4oDCHYs26Pno9KyPA7z%2FZZB2yn%2FhmppfX%2FfsyiGcMsfYf79%2B09yImC9A2rQhPz%2FsGdgiri62rMNyNxlH1zSw58jzreH2K3v%2F2Uath1Kc6XsEGy2g6%2BGA3VuXcK43VpBDVG3Xi23FDRSsYlJRIIAPX1gq0w3w42ZvHRvX0hUyoVpwt2uEIES7WWy7%2B5yVc5h1su33ueDAJJGyz9FejJ1wkhVfmSnxamCblf3XZBC0O2POcrIak6GEFDpbiUYtShnbb2oD83fWOKJlQGovziURoXGENZ6TLRpYgXypHTAVxuyGpecU57S10t2zViyVNmlCsPcyfHCGBgTrl6xAdUmDE6LF8FDmTt6Pv%2F%2FuVpc3nL6MxUzKtxIV63LKHf%2BdjiWys64YwJHYzoupvmUtvWMfVvsi8QeOjRXvzNFHTUz%2F3j4JRHV8zuRuUCtpJbezA5QWouZOKsTpAheGzc%2FTI%2BVGxX4ZRY%2BLDMCDywHDVUD2y1phN6Uy%2BjOYIN6i%2BhZ31MPxtHyUDb5dMxW9lKAmLH0Guw6JNVDtfjCwef1Av96jyJ5Th1i3rPK6IYaCRC%2BlGEc22qmPPKwuwtWHH6fZt9Y6sX4kjazVg0Lo5ywcrG5YU8LA2%2BmclkMCH1y8dxsdCdkcuBWpAcLIs4A%2FjIWtIy0Bpj%2FQt%2FbnqlTlPqUtfX4lPdaKbUVNsvzJQahAm3qgamcDS0HmE%2FOOg%2F3VxsCPDlgJXvz8cowPTVHzWJfLIVE14PjHvViQ3PoSP4skVm%2BZogNkbPMsg4Cx54MjFgFFMCUg9QyuhSWXYydQitOk90p4dTwIwQscpy1MOMP89jL'; // HARD CODED YAYAYAYA
     var stream = WatsonSpeech.SpeechToText.recognizeMicrophone({
         token: token
     });
@@ -38,9 +39,6 @@ document.querySelector('#button').onclick = function () {
         console.log(err);
     });
     document.querySelector('#stop').onclick = stream.stop.bind(stream);
-  }).catch(function(error) {
-      console.log(error);
-  });
 };
 </script></code></pre>
 
