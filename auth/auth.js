@@ -10,8 +10,8 @@ var http = require('http');
 var server = http.createServer(function (request, response) {
 
   var authorization = new watson.AuthorizationV1({
-	  username: '<Text to Speech username>',
-	  password: '<Text to Speech password>'
+	  username: 'b77079c8-42eb-44b1-9ee0-b737f74ab747',
+	  password: 'dBDx4iUwDZb4'
 	  url: watson.TextToSpeechV1.URL
 	});
 
