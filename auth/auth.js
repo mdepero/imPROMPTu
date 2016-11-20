@@ -1,5 +1,7 @@
 
 
+// NOPE not using this, going to use hard coded PHP nonsense
+
 var watson = require('watson-developer-cloud');
 
 

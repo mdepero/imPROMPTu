@@ -1,46 +1,90 @@
+
+<!-- THIS FILE USES IBM WATSON API, NO LONGER USING THIS FOR SPEECH RECONGITION -->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Watson Speech to Text client example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/black.css">
+
+
 </head>
 <body>
 
-<section>
-    <h2>Transcribe from Microphone</h2>
-    <button id="button">Start Microphone Transcription</button>
+<div id="start">
+
     <button id="stop">Stop</button>
 
-    <h2>Output:</h2>
-    <div id="output">Open your browser's console to view the output.</div>
-</section>
+</div>
 
-<script src="watson-speech.js"></script>
+  <div class="reveal">
+        <div class="slides">
+            <section>Slide 1 Tester First</section>
+        </div>
+  </div>
+        <script src="js/reveal.js"></script>
+        <script>
+            Reveal.initialize({
+              fullscreen: true
+            });
+        </script>
+
+
+<script src="js/watson-speech.js"></script>
 <!-- window.fetch pollyfill for IE/Edge & Older Chrome/FireFox -->
-<script src="fetch.js"></script>
+<script src="js/fetch.js"></script>
 
-<h2>Code for this demo:</h2>
+<script>
 
-<pre><code><script style="display: block;">
-document.querySelector('#button').onclick = function () {
-  // fetch('/api/speech-to-text/token')
-  // .then(function(response) {
-  //     return response.text();
-  // }).then(function (token) {
-    var token = 'wzjX4UTN12%2FTBYmWcIwL0%2BRaASV2wuXp6xmyYf2mUiJoLXXX6xb%2FBKPBYeObsQplSRRWLixDxSur4PxS5uWQ9P6Qs2z9UH4Wuli98UEPoy0%2BNRfLGGyY2JjCIu7LatroMNMhG4oDCHYs26Pno9KyPA7z%2FZZB2yn%2FhmppfX%2FfsyiGcMsfYf79%2B09yImC9A2rQhPz%2FsGdgiri62rMNyNxlH1zSw58jzreH2K3v%2F2Uath1Kc6XsEGy2g6%2BGA3VuXcK43VpBDVG3Xi23FDRSsYlJRIIAPX1gq0w3w42ZvHRvX0hUyoVpwt2uEIES7WWy7%2B5yVc5h1su33ueDAJJGyz9FejJ1wkhVfmSnxamCblf3XZBC0O2POcrIak6GEFDpbiUYtShnbb2oD83fWOKJlQGovziURoXGENZ6TLRpYgXypHTAVxuyGpecU57S10t2zViyVNmlCsPcyfHCGBgTrl6xAdUmDE6LF8FDmTt6Pv%2F%2FuVpc3nL6MxUzKtxIV63LKHf%2BdjiWys64YwJHYzoupvmUtvWMfVvsi8QeOjRXvzNFHTUz%2F3j4JRHV8zuRuUCtpJbezA5QWouZOKsTpAheGzc%2FTI%2BVGxX4ZRY%2BLDMCDywHDVUD2y1phN6Uy%2BjOYIN6i%2BhZ31MPxtHyUDb5dMxW9lKAmLH0Guw6JNVDtfjCwef1Av96jyJ5Th1i3rPK6IYaCRC%2BlGEc22qmPPKwuwtWHH6fZt9Y6sX4kjazVg0Lo5ywcrG5YU8LA2%2BmclkMCH1y8dxsdCdkcuBWpAcLIs4A%2FjIWtIy0Bpj%2FQt%2FbnqlTlPqUtfX4lPdaKbUVNsvzJQahAm3qgamcDS0HmE%2FOOg%2F3VxsCPDlgJXvz8cowPTVHzWJfLIVE14PjHvViQ3PoSP4skVm%2BZogNkbPMsg4Cx54MjFgFFMCUg9QyuhSWXYydQitOk90p4dTwIwQscpy1MOMP89jL'; // HARD CODED YAYAYAYA
+var lang = JSON.parse('[{"pattern":".*presentation.*about ([a-zA-Z ]+).*","function":"UpdateTopic"},{"pattern":".*i will talk.*about ([a-zA-Z ]+).*","function":"UpdateTopic"},{"pattern":".*topic is ([a-zA-Z ]+).*","function":"UpdateTopic"},{"pattern":".*new topic ([a-zA-Z ]+).*","function":"UpdateTopic"},{"pattern":".*change topics ([a-zA-Z ]+).*","function":"UpdateTopic"},{"pattern":".*let\'s move on.*","function":"NewSlide"},{"pattern":".*clear things.*","function":"NewSlide"},{"pattern":".*new slide.*","function":"NewSlide"},{"pattern":".*find.*image of ([a-zA-Z ]+).*","function":"PrintImage"},{"pattern":".*take a look at ([a-zA-Z ]+).*","function":"PrintImage"},{"pattern":".*picture of ([a-zA-Z ]+).*","function":"PrintImage"},{"pattern":".*create bullet points (([a-zA-Z ]+) and ([a-zA-Z ]+))+.*","function":"NewBullets"},{"pattern":".*points of interest.*(([a-zA-Z ]+) and ([a-zA-Z ]+))+.*","function":"NewBullets"},{"pattern":".*(presentation|following).*will include (([a-zA-Z ]+) and ([a-zA-Z ]+))+.*","function":"NewBullets"}]');
+
+
+$(document).ready(function () {
+  fetch('./auth')
+  .then(function(response) {
+      return response.text();
+  }).then(function (token) {
     var stream = WatsonSpeech.SpeechToText.recognizeMicrophone({
         token: token
     });
     stream.setEncoding('utf8'); // get text instead of Buffers for on data events
     stream.on('data', function(data) {
-      console.log(data);
+
+      lang.forEach(function(item, index){
+        var pat = new RegExp(item.pattern, "i"); // i indicates not case sensitive
+        if(pat.test(data)){
+          var match = pat.exec(data);
+          console.log('Would execute script '+item.function+'<br/>');
+
+          if(item.function == "NewSlide"){
+            $(".slides").append("<section></section>");
+            Reveal.next();
+          }
+          if(item.function == "UpdateTopic"){
+            $(".slides section:last-of-type").prepend("<h1>"+match[1]+"</h1>");
+          }
+
+
+
+        }
+      });
+
     });
     stream.on('error', function(err) {
         console.log(err);
     });
     document.querySelector('#stop').onclick = stream.stop.bind(stream);
-};
-</script></code></pre>
+  }).catch(function(error) {
+      console.log(error);
+  });
+});
+</script>
 
 </body>
 </html>

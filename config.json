@@ -1,0 +1,18 @@
+[
+
+{"pattern":".*presentation.*about ([\\w ]+).*","function":"UpdateTopic"}
+{"pattern":".*i will talk.*about ([\\w ]+).*","function":"UpdateTopic"}
+{"pattern":".*topic is ([\\w ]+).*","function":"UpdateTopic"}
+{"pattern":".*new topic ([\\w ]+).*","function":"UpdateTopic"}
+{"pattern":".*change topics ([\\w ]+).*","function":"UpdateTopic"}
+{"pattern":".*let's move on.*","function":"NewSlide"}
+{"pattern":".*clear things.*","function":"NewSlide"}
+{"pattern":".*new slide.*","function":"NewSlide"}
+{"pattern":".*find.*image of ([\\w ]+).*","function":"PrintImage"}
+{"pattern":".*take a look at ([\\w ]+).*","function":"PrintImage"}
+{"pattern":".*picture of ([\\w ]+).*","function":"PrintImage"}
+{"pattern":".*create bullet points (([\\w ]+) and ([\\w ]+))+.*","function":"NewBullets"}
+{"pattern":".*points of interest.*(([\\w ]+) and ([\\w ]+))+.*","function":"NewBullets"}
+{"pattern":".*(presentation|following).*will include (([\\w ]+) and ([\\w ]+))+.*","function":"NewBullets"}
+
+]
