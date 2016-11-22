@@ -108,7 +108,7 @@ if (!('webkitSpeechRecognition' in window)) {
       if (event.results[i].isFinal) {
         final_transcript += event.results[i][0].transcript;
       } else {
-        return;
+        //return;
         interim_transcript += event.results[i][0].transcript;
       }
     }
@@ -116,6 +116,7 @@ if (!('webkitSpeechRecognition' in window)) {
     //console.log("something else: "+linebreak(final_transcript));
     //console.log("Interim: "+linebreak(interim_transcript));
     var data = final_transcript;
+    var data = interim_transcript;
     final_transcript = '';
     console.log(data);
         lang.forEach(function(item, index){
